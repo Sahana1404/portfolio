@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahana's Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f5dc 0%, #fffaf0 50%, #fff8dc 100%);
+            color: #001f3f;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #001f3f 0%, #003d7a 100%);
+            color: #f5f5dc;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 15px rgba(0, 31, 63, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Times New Roman', serif;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #f5f5dc;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .tagline {
+            display: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            margin: 0;
+        }
+
+        nav a {
+            color: #f5f5dc;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid transparent;
+        }
+
+        nav a:hover {
+            background: linear-gradient(135deg, #ffd700, #ffb6c1);
+            color: #001f3f;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 12px rgba(255, 215, 0, 0.4);
+            border: 2px solid #ffd700;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        section {
+            background: linear-gradient(135deg, #ffffff 0%, #fff8f0 100%);
+            margin-bottom: 2rem;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 31, 63, 0.15);
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 3px;
+            background: linear-gradient(135deg, #001f3f, #ffd700, #ffb6c1, #87ceeb);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+        }
+
+        h2 {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #001f3f, #003d7a, #0066cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            padding-bottom: 1rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #ffd700, #ffb6c1, #87ceeb);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .profile-img-container {
+            position: relative;
+            width: 220px;
+            height: 220px;
+        }
+
+        .profile-img-container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(135deg, #ffd700, #ffb6c1, #87ceeb, #98fb98);
+            border-radius: 50%;
+            z-index: -1;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .profile-img {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .bio {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.15rem;
+            text-align: center;
+            line-height: 1.9;
+            color: #333;
+        }
+
+        .skills {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .skills h3 {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #001f3f;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .skills-list li {
+            background: linear-gradient(135deg, #fff 0%, #f0f8ff 100%);
+            padding: 1.2rem;
+            border-radius: 15px;
+            text-align: center;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.05rem;
+            border: 2px solid #87ceeb;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(135, 206, 235, 0.2);
+        }
+
+        .skills-list li:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(135, 206, 235, 0.4);
+            border-color: #ffd700;
+            background: linear-gradient(135deg, #fffacd 0%, #fff8dc 100%);
+        }
+
+        .skills-list li i {
+            display: block;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #001f3f;
+        }
+
+        /* Contact Section */
+        .contact-message {
+            font-family: 'Times New Roman', serif;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #555;
+            margin-top: 1rem;
+            line-height: 1.8;
+        }
+
+        /* Floating Action Buttons */
+        .floating-buttons {
+            position: fixed;
+            right: 2rem;
+            bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .float-btn {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.8rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .float-btn:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            animation: none;
+        }
+
+        .float-btn.call {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+        }
+
+        .float-btn.whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+        }
+
+        .float-btn.email {
+            background: linear-gradient(135deg, #EA4335, #C5221F);
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #001f3f 0%, #003d7a 100%);
+            color: #f5f5dc;
+            padding: 3rem 2rem;
+            font-family: Arial, sans-serif;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-title {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer-contact {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .footer-contact-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #ffd700;
+            transform: translateX(5px);
+        }
+
+        .footer-contact-item i {
+            font-size: 1.8rem;
+            width: 40px;
+            text-align: center;
+        }
+
+        .footer-contact-item.email i { color: #EA4335; }
+        .footer-contact-item.phone i { color: #4CAF50; }
+        .footer-contact-item.address i { color: #FF9800; }
+
+        .footer-contact-item a {
+            color: #f5f5dc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-contact-item a:hover {
+            color: #ffd700;
+        }
+
+        .social-media {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .social-media h4 {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #ffd700;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.6rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid transparent;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .social-links a.linkedin {
+            color: #0077B5;
+            border-color: #0077B5;
+        }
+
+        .social-links a.linkedin:hover {
+            background: #0077B5;
+            color: white;
+        }
+
+        .social-links a.github {
+            color: #f5f5dc;
+            border-color: #f5f5dc;
+        }
+
+        .social-links a.github:hover {
+            background: #f5f5dc;
+            color: #001f3f;
+        }
+
+        .social-links a.instagram {
+            color: #E4405F;
+            border-color: #E4405F;
+        }
+
+        .social-links a.instagram:hover {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: white;
+        }
+
+        .social-links a.facebook {
+            color: #1877F2;
+            border-color: #1877F2;
+        }
+
+        .social-links a.facebook:hover {
+            background: #1877F2;
+            color: white;
+        }
+
+        .footer-divider {
+            border: none;
+            border-top: 2px solid rgba(245, 245, 220, 0.3);
+            margin: 2rem 0;
+        }
+
+        .footer-copyright {
+            text-align: center;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            section {
+                padding: 2rem 1.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .profile-img-container,
+            .profile-img {
+                width: 180px;
+                height: 180px;
+            }
+
+            .floating-buttons {
+                right: 1rem;
+                bottom: 1rem;
+            }
+
+            .float-btn {
+                width: 55px;
+                height: 55px;
+                font-size: 1.5rem;
+            }
+
+            .footer-contact {
+                grid-template-columns: 1fr;
+            }
+
+            .social-links {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            nav a {
+                padding: 0.5rem 1rem;
+                font-size: 0.95rem;
+            }
+
+            main {
+                padding: 2rem 1rem;
+            }
+
+            section {
+                padding: 1.5rem 1rem;
+            }
+
+            .skills-list {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-title {
+                font-size: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header id="home">
+        <div class="header-content">
+            <div class="logo">SAHANA KONANGI</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- About Section -->
+        <section id="about">
+            <h2> About Me</h2>
+            <div class="about-content">
+                <div class="profile-img-container">
+                    <img src="C:\Users\gksah\OneDrive\Desktop - Copy\photos\B612_20241226_194027_331 - Copy.jpg" alt="Sahana's Profile Picture" class="profile-img">
+                </div>
+                <p class="bio">
+                    Hello! I'm Sahana, a passionate professional dedicated to creating innovative solutions and making a positive impact. 
+                    With a blend of creativity and technical expertise, I strive to deliver excellence in everything I do. 
+                    I believe in continuous learning and pushing boundaries to achieve remarkable results. Let's connect and create something amazing together!
+                </p>
+                <div class="skills">
+                    <h3>🎯 Skills & Interests</h3>
+                    <ul class="skills-list">
+                        <li>
+                            <i class="fa fa-code"></i>
+                            Web Development
+                        </li>
+                        <li>
+                            <i class="fa fa-paint-brush"></i>
+                            Creative Design
+                        </li>
+                        <li>
+                            <i class="fa fa-lightbulb"></i>
+                            Problem Solving
+                        </li>
+                        <li>
+                            <i class="fa fa-tasks"></i>
+                            Project Management
+                        </li>
+                        <li>
+                            <i class="fa fa-comments"></i>
+                            Communication
+                        </li>
+                        <li>
+                            <i class="fa fa-rocket"></i>
+                            Innovation
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2>📞 Get In Touch</h2>
+            <p class="contact-message">
+                I'd love to hear from you! Whether you have a question, want to collaborate, or just want to say hello, 
+                feel free to reach out through any of the channels listed in the footer below. Let's connect! 💬
+            </p>
+        </section>
+    </main>
+
+    <!-- Floating Action Buttons -->
+    <div class="floating-buttons">
+        <a href="tel:+919108010168" class="float-btn call" title="Call Me">
+            <i class="fa fa-phone"></i>
+        </a>
+        <a href="https://wa.me/919108010168" target="_blank" class="float-btn whatsapp" title="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="mailto:gksahana0@gmail.com" class="float-btn email" title="Email Me">
+            <i class="fa fa-envelope"></i>
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h3 class="footer-title">📬 Contact Information</h3>
+            <div class="footer-contact">
+                <div class="footer-contact-item email">
+                    <i class="fa fa-envelope"></i>
+                    <div>
+                        <strong>Email:</strong><br>
+                        <a href="mailto:gksahana0@gmail.com">gksahana0@gmail.com</a>
+                    </div>
+                </div>
+                <div class="footer-contact-item phone">
+                    <i class="fa fa-phone"></i>
+                    <div>
+                        <strong>Phone:</strong><br>
+                        <a href="tel:+919108010168">+91 9108010168</a>
+                    </div>
+                </div>
+                <div class="footer-contact-item address">
+                    <i class="fa fa-map-marker"></i>
+                    <div>
+                        <strong>Address:</strong><br>
+                        Bangalore, Karnataka 562110
+                    </div>
+                </div>
+            </div>
+
+            <div class="social-media">
+                <h4>🌐 Connect With Me</h4>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/sahana-konangi-9359b22a7?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="linkedin" title="LinkedIn">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/sahana" target="_blank" class="github" title="GitHub">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                    <a href="https://www.instagram.com/saha_na1404?igsh=NGl6ZmVlZjhtdXc1" target="_blank" class="instagram" title="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="https://www.facebook.com/share/1CZfnZWdNH/" target="_blank" class="facebook" title="Facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                </div>
+            </div>
+
+            <hr class="footer-divider">
+            <p class="footer-copyright">© Sahana 2025. All Rights Reserved. 💖</p>
+        </div>
+    </footer>
+</body>
+</html>
